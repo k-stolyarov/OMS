@@ -1,0 +1,15 @@
+import os
+import ConfigParser
+import SCons.Environment
+
+Import('env')
+SCons.Environment.apply_tools(env, tools = ["default", "gch"], toolpath = '.')
+env.Append(CPPPATH =os.path.join(os.getcwd(), 'src'))
+
+sources= """
+	src/main.cpp
+"""
+
+print "Files: \"" , sources.split() , "\""
+
+env.Program(sources.split(), LIBS=['zmq'], LIBPATH='.')

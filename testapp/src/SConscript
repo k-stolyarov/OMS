@@ -1,0 +1,16 @@
+import os
+import ConfigParser
+import SCons.Environment
+
+Import('env')
+sources= """
+	main.cpp
+	test.cpp
+	tes/test.cpp
+"""
+
+env['Gch'] = env.Gch('stdafx.h')[0]
+
+print env['Gch']
+env.Program(sources.split())
+
