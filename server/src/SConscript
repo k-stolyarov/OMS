@@ -1,0 +1,19 @@
+import os
+import ConfigParser
+import SCons.Environment
+
+Import('env')
+sources= """
+	main.cpp
+	CThreadManager.cpp
+	CMessageProcessor.cpp
+	BetDaqRequestThread.cpp
+"""
+
+boos_version_suffix="-1_48"
+
+env['Gch'] = env.Gch('stdafx.h')[0]
+
+print env['Gch']
+env.Program(sources.split(), LIBS=['zmq', 'boost_thread'+boos_version_suffix], LIBPATH='.')
+

@@ -1,0 +1,14 @@
+import os
+import ConfigParser
+import SCons.Environment
+
+proj_dir = 'server'
+
+Import('env')
+SCons.Environment.apply_tools(env, tools = ["default", "gch"], toolpath = '.')
+env.Append(CPPPATH ='#/src')
+env.Append(CPPPATH ='#/')
+build_dir = os.path.join(os.environ['OMS_ROOT'], 'build', proj_dir)
+env.VariantDir(build_dir, 'src')
+SConscript(dirs=[build_dir], exports=['env']);
+

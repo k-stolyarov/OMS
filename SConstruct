@@ -7,4 +7,4 @@ Export('env')
 #SConscript('0mq_client/SConscript', variant_dir=os.path.join('build', '0mq_client'), duplicate=0)
 
 SConscript('testapp/SConscript');
-#, variant_dir=os.path.join('build', 'testapp'), duplicate=0)
+SConscript('server/SConscript');
