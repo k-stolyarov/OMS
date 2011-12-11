@@ -2,18 +2,21 @@ import os
 import ConfigParser
 import SCons.Environment
 
+output_name='server'
 Import('env')
 sources= """
-	main.cpp
-	CThreadManager.cpp
-	CMessageProcessor.cpp
 	BetDaqRequestThread.cpp
+	CMessageProcessor.cpp
+	CThreadManager.cpp
+	log.cpp
+	main.cpp
 """
 
 boos_version_suffix="-1_48"
+gcc_version_suffix="-gcc45"
 
 env['Gch'] = env.Gch('stdafx.h')[0]
 
-print env['Gch']
-env.Program(sources.split(), LIBS=['zmq', 'boost_thread'+boos_version_suffix], LIBPATH='.')
+libs=['zmq', 'boost_filesystem' + boos_version_suffix, 'boost_thread'+boos_version_suffix, 'boost_log'+gcc_version_suffix+ "-mt" + boos_version_suffix]
+env.Program(output_name, sources.split(), LIBS=libs, LIBPATH='.')
 

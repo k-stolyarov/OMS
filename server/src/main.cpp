@@ -6,15 +6,19 @@
 
 #include "stdafx.h"
 #include "CMessageProcessor.h"
+#include <server/log.h>
 
 int main(int argc, char** argv)
 {
+	oms::init_logging();
+	BOOST_LOG_SEV(oms::logger::get(), boost::log::sinks::syslog::warning) << "Starting OMS server";
 	int major;
 	int minor;
 	int patch;
+	
 
 	zmq::version (&major, &minor, &patch);
-	std::cout << "Using 0mq library of version " << major << "." << minor << "." << patch << "\n";
+	BOOST_LOG_SEV(oms::logger::get(), boost::log::sinks::syslog::debug) << "Using 0mq library of version " << major << "." << minor << "." << patch << "\n";
 
 	std::string clients_request_socket = "tcp://*:5555";
 
